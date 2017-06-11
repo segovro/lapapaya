@@ -1,13 +1,13 @@
-pragma solidity ^0.4.8;
+pragma solidity ^0.4.11;
 
-contract token {
+contract papaya {
     /* Public variables of the token */
     string public standard = 'Token 0.1';
     string public name = 'papaya';
     string public symbol = 'φ';
     uint8 public decimals = 2;
     uint256 public totalSupply = 100000000000;
-    int256 public negLim = 5000;
+    int256 public negLim = 5000;  // Limit of negative balances
     
     // Owner of this contract
     address public owner;
@@ -24,6 +24,13 @@ contract token {
             throw;
          }
         _;
+     }
+     
+     /* Initializes contract with initial supply tokens to the creator of the contract */
+     function papaya(            					
+         ) {
+     		owner = msg.sender;
+     		balances[msg.sender] = int256(totalSupply);       // Give the creator all initial tokens
      }
 
     /* This generates public events on the blockchain that will notify clients */
@@ -85,4 +92,3 @@ contract token {
         throw;     // Prevents accidental sending of ether
     }
 }
-
